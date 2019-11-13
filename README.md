@@ -7,10 +7,10 @@
 
 (2)在src/main/resources/db.properties文件中修改数据库用户名和密码
 
-(3)商家处理订单：<br>
+(3)商家登陆：<br>
      账号：123   密码：123<br>
    
-   客户点单：<br>
+   客户登陆：<br>
      账号：12    密码：12
 
 To Leitast:
