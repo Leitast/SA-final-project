@@ -7,7 +7,9 @@
 
 (2)在src/main/resources/db.properties文件中修改数据库用户名和密码
 
-(3)商家登陆：<br>
+(3)运行Tomcat服务器
+
+(4)商家登陆：<br>
      账号：123   密码：123<br>
    
    客户登陆：<br>
