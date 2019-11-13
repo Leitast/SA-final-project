@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.FoodTypeMapper">
+	<select id="getAllFoodType" resultType="FoodType" parameterType="FoodType">
+		SELECT * FROM food_type 
+		<where>
+			<if test="typeName!=null and typeName!=''">
+				typeName = #{typeName}
+			</if>
+		</where>
+	</select>
+	
+	<update id="updateFoodType" parameterType="FoodType">
+		UPDATE food_type SET typeName = #{typeName} WHERE ftypeId = #{ftypeId}
+	</update>
+	
+	<insert id="insertFoodType" parameterType="FoodType">
+		INSERT INTO food_type VALUES (DEFAULT,#{typeName})
+	</insert>
+	
+	<select id="findIfFoodType" resultType="Integer" parameterType="Integer">
+		SELECT COUNT(*) FROM food WHERE foodTypeId = #{ftypeId}
+	</select>
+	
+	<delete id="deleteFoodType" parameterType="Integer">
+		DELETE FROM food_type WHERE ftypeId = #{ftypeId}
+	</delete>
+</mapper>

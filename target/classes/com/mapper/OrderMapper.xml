@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.OrderMapper">
+
+<resultMap type="com.model.Orders" id="ordersMap">
+	<id column="oId" property="oId"/>
+	<result column="orderTime" property="orderTime"/>
+	<result column="totalPrice" property="totalPrice"/>
+	<result column="orderStatus" property="orderStatus"/>
+	<association property="tableId" select="com.mapper.DinnerTableMapper.getDinnerByID"
+	    	column="tableId">
+	</association>
+	<collection property="orderDetails" select="com.mapper.OrderDetialMapper.findOrderDetialByoId"
+	    	column="oId">
+	</collection>
+</resultMap>
+
+<select id="findOrders" resultMap="ordersMap" parameterType="com.model.Orders">
+		SELECT * FROM orders 
+		<where>
+			<if test="orderStatus!=null and orderStatus!=0">
+				and orderStatus=#{orderStatus}
+			</if>
+		</where>
+	</select>
+<select id="selectFoodById" resultMap="ordersMap" parameterType="int">
+SELECT * FROM orders where oId = #{oId}
+
+</select>
+
+<insert id="add">
+	insert into orders(tableId,orderTime,totalPrice) values(#{id},now(),#{price})
+</insert>
+	
+</mapper>

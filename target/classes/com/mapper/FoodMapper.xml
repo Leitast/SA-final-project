@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.FoodMapper">
+	<resultMap type="Food" id="foodMap">
+		<id column="fId" property="fId"/>
+		<result column="foodName" property="foodName"/>
+		<result column="price" property="price"/>
+		<result column="mprice" property="mprice"/>
+		<result column="remark" property="remark"/>
+		<result column="img" property="img"/>
+		<association property="foodType" javaType="FoodType">
+			<id column="ftypeId" property="ftypeId"/>
+			<result column="typeName" property="typeName"/>
+		</association>
+	</resultMap>
+	<select id="findFood" parameterType="Map" resultMap="foodMap">
+		SELECT * FROM food,food_type WHERE
+		<trim prefixOverrides="and">
+			<if test="foodMap.foodName!=null and foodMap.foodName!=''">
+				and foodName like CONCAT('%',#{foodMap.foodName},'%')
+			</if>
+		    <if test="foodMap.foodTypeName!=null and foodMap.foodTypeName!=''">
+				and food_type.typeName = #{foodMap.foodTypeName}
+			</if> 
+			and food.foodTypeId = food_type.ftypeId ORDER BY food.fId
+		</trim>
+	
+	</select>
+	
+	<select id="getFoodTypeName" resultType="FoodType">
+		SELECT * FROM food_type
+	</select>
+	
+	<delete id="deleteFood" parameterType="Integer">
+		DELETE FROM food WHERE fId=#{fId}
+	</delete>
+	
+	<insert id="insertFood" parameterType="Food">
+		INSERT INTO food VALUES (DEFAULT,#{foodName},#{foodType.ftypeId},
+		#{price},#{mprice},#{remark},#{img})
+	</insert>
+	
+	<select id="selectFoodById" parameterType="Integer" resultMap="foodMap">
+		SELECT * FROM food,food_type WHERE food.foodTypeId = food_type.ftypeId AND fId = #{fId}
+	</select>
+	
+	<update id="updateFood" parameterType="Food">
+		UPDATE food SET 
+		<trim suffixOverrides=",">
+		<if test="foodName!=null and foodName!=''">
+			foodName = #{foodName},
+		</if>
+		<if test="foodType.ftypeId!=null and foodType.ftypeId!=''">
+			foodTypeId = #{foodType.ftypeId},
+		</if>
+		<if test="price!=null and price!=''">
+			price = #{price},
+		</if>
+		<if test="mprice!=null and mprice!=''">
+			mprice = #{mprice},
+		</if>
+		<if test="remark!=null and remark!=''">
+			remark = #{remark},
+		</if>
+		<if test="img!=null and img!=''">
+			img = #{img},
+		</if>
+		</trim>
+		WHERE fId = #{fId}
+	</update>
+	
+	<select id="findAll" resultMap="foodMap">
+		select * from food;
+	</select>
+	
+	
+	<select id="findFoodin" resultMap="foodMap">
+		SELECT * FROM food,food_type WHERE fid in 
+		<foreach collection="ids" open="(" separator="," close=")" item="id" >
+			#{id}
+		</foreach>
+	</select>
+</mapper>

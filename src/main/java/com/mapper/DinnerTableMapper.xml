@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.DinnerTableMapper">
+	<select id="findDinnerTable" resultType="DinnerTable" parameterType="DinnerTable">
+		SELECT * FROM dinner_table 
+		<where>
+			<if test="tableName!=null and tableName!=''">
+				and tableName=#{tableName}
+			</if>
+			<if test="tableStatus!=null and tableStatus!=''">
+				and tableStatus=#{tableStatus}
+			</if>
+		</where>
+	</select>
+	
+	<select id="getDinnerByID" resultType="DinnerTable" parameterType="Integer">
+		SELECT * FROM dinner_table WHERE dId=#{dId}
+	</select>
+	
+	<update id="updateDinnerTable" parameterType="DinnerTable">
+		UPDATE dinner_table SET 
+		<if test="tableStatus == 1">
+			tableStatus = 2
+		</if>
+		<if test="tableStatus == 2">
+			tableStatus = 1
+		</if>
+		  , orderTime=#{orderTime}
+		  WHERE dId=#{dId}
+	</update>
+	
+	<insert id="insertDinnerTable" parameterType="DinnerTable">
+		INSERT INTO dinner_table VALUES (DEFAULT,#{tableName},DEFAULT,#{orderTime})
+	</insert>
+	
+	<delete id="deleteDinnerTable" parameterType="Integer">
+		DELETE FROM dinner_table WHERE dId=#{dId}
+	</delete>
+</mapper>

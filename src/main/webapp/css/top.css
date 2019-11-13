@@ -1,0 +1,67 @@
+#Top_1{
+	height: 100px;
+	background-image: url(../images/top_head1_bg.gif);
+	width: 100%;
+	margin: 0 auto;
+	background-size:contain;
+	min-width: 1850px;
+}
+#Top_2{
+	height: 50px;
+	width: 100%;
+	background-image: url(../images/top_head2_bg.gif);
+	margin: 0 auto;
+	background-size:contain;
+	min-width: 1850px;
+}
+#Top_1 #logo{
+	height: 100%;
+	width: 30%;
+	float: left;
+}
+#Top_1 #logo img{
+	margin: 15px;
+		
+}
+#Top_1 #right{
+	margin-top: 16px;
+	float: right;
+	margin-left: 0;
+	height: 100%;
+	width: 24%;
+}
+#Top_1 #right #user{
+	margin-left: 260px;
+}
+font{
+	font-size: 18px;
+	color: #C4E3F3;
+	margin-left: 12px;
+}
+#Top_1 #right #sys{
+	margin-top: 2px;
+}
+#Top_1 #right #sys .help{
+	width: 100px;
+	float: left;
+	margin-left: 220px;
+
+}
+#Top_1 #right #sys .out{
+	width: 100px;
+	float: right;
+	margin-right: 20px;
+}
+#Top_2 #say{
+	float: left;
+}
+#Top_2 #timeShow{
+	margin-top: 10px;
+	float: right;
+	width: 500px;
+	height: 48px;
+	font-size: 18px;
+	color: white;
+	margin-right: -500px;
+
+}
