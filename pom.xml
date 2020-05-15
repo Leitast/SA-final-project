@@ -32,7 +32,7 @@
 		<!-- servlet版本 -->
 		<servlet.version>4.0.0</servlet.version>
 		<!-- jackson版本 -->
-		<jackson.version>2.9.4</jackson.version>
+		<jackson.version>2.11.0</jackson.version>
 		<!-- jstl标签库版本 -->
 		<taglibs.version>1.2.5</taglibs.version>
 	</properties>
